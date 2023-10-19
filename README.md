@@ -1,2 +1,2 @@
-# nonogram
-nonogram making
+# horrorNonogram
+horrorNonogram making

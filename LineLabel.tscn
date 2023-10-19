@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://ty3a4rwgsvg1"]
+
+[ext_resource type="FontFile" uid="uid://dwusstyl4cqnn" path="res://Res/Fonts/Early GameBoy.ttf" id="1_ciyv1"]
+
+[node name="LineLabel" type="Label"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("1_ciyv1")
+theme_override_font_sizes/font_size = 24
+text = "01234"

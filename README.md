@@ -1,2 +1,2 @@
-# horrorNonogram
-Game Jam project at Zemind
+# nonogram
+nonogram making

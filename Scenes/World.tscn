@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cb2w2yecbtopc"]
+[gd_scene load_steps=8 format=3 uid="uid://cb2w2yecbtopc"]
 
 [ext_resource type="Texture2D" uid="uid://bu0tv6suj1uxa" path="res://Res/TileMap/Game_Tile.png" id="1_jk1h6"]
+[ext_resource type="Script" path="res://Scenes/World.gd" id="1_xxaat"]
 [ext_resource type="PackedScene" uid="uid://bt7vil2htq6lc" path="res://Scenes/Player.tscn" id="2_6t3nw"]
 [ext_resource type="PackedScene" uid="uid://bhi7peh17ha0q" path="res://Scenes/Ghost.tscn" id="3_ekqwk"]
 [ext_resource type="FontFile" uid="uid://dwusstyl4cqnn" path="res://Res/Fonts/Early GameBoy.ttf" id="4_ot7k3"]
@@ -76,6 +77,7 @@ tile_size = Vector2i(128, 128)
 sources/0 = SubResource("TileSetAtlasSource_tnsvv")
 
 [node name="World" type="Node2D"]
+script = ExtResource("1_xxaat")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_1rrb3")
@@ -129,3 +131,5 @@ offset_bottom = 399.0
 theme_override_fonts/font = ExtResource("4_ot7k3")
 theme_override_font_sizes/font_size = 80
 text = "Horror Nonogram"
+
+[connection signal="pressed" from="TileMap/RegularMode" to="." method="_on_regular_mode_pressed"]

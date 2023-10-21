@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://cedsbmo3056mg"]
+[gd_scene load_steps=14 format=3 uid="uid://cedsbmo3056mg"]
 
 [ext_resource type="Script" path="res://Scripts/Boards.gd" id="1_223rf"]
 [ext_resource type="Texture2D" uid="uid://4md2ma5hxd04" path="res://Res/Sprites/Case.png" id="2_ecu3t"]
 [ext_resource type="Texture2D" uid="uid://bu0tv6suj1uxa" path="res://Res/TileMap/Game_Tile.png" id="2_w7s5j"]
 [ext_resource type="Texture2D" uid="uid://cukeatqx6qgw0" path="res://Res/Sprites/Case_filled.png" id="3_0mecy"]
+[ext_resource type="Texture2D" uid="uid://drw527soskfvk" path="res://Res/Sprites/Case_crossed.png" id="5_8pgl0"]
+[ext_resource type="Texture2D" uid="uid://dclxfmqnmjeek" path="res://Res/Sprites/selection.png" id="6_4xbim"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_at4wv"]
 texture = ExtResource("2_w7s5j")
@@ -84,22 +86,35 @@ texture = ExtResource("3_0mecy")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iiujj"]
+texture = ExtResource("5_8pgl0")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bg0rs"]
+texture = ExtResource("6_4xbim")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_h3ri3"]
 tile_size = Vector2i(34, 34)
 sources/0 = SubResource("TileSetAtlasSource_6577e")
 sources/1 = SubResource("TileSetAtlasSource_qpxej")
+sources/2 = SubResource("TileSetAtlasSource_iiujj")
+sources/3 = SubResource("TileSetAtlasSource_bg0rs")
 
 [node name="Board" type="Node2D"]
+scale = Vector2(1.2, 1.2)
 script = ExtResource("1_223rf")
 
 [node name="BackgroundTileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_j547w")
 cell_quadrant_size = 128
 format = 2
-layer_0/tile_data = PackedInt32Array(0, 65536, 4, 1, 131072, 4, 2, 131072, 4, 3, 65536, 4, 4, 131072, 4, 5, 65536, 4, 6, 131072, 4, 7, 65536, 4, 9, 65536, 4, 12, 65536, 4, 14, 65536, 4, 13, 131072, 4, 11, 131072, 4, 10, 131072, 4, 8, 131072, 4, 524288, 0, 6, 524289, 0, 6, 524290, 65536, 6, 524291, 65536, 6, 524292, 65536, 6, 524293, 65536, 6, 524294, 65536, 6, 524295, 65536, 6, 524296, 65536, 6, 524297, 65536, 6, 524298, 0, 6, 524300, 0, 6, 524301, 0, 6, 524302, 0, 6, 524299, 0, 6, 458752, 65536, 5, 458753, 65536, 5, 458754, 65536, 5, 458755, 65536, 5, 458756, 65536, 5, 458757, 65536, 5, 458758, 65536, 5, 458759, 65536, 5, 458760, 65536, 5, 458761, 65536, 5, 458762, 65536, 5, 458763, 65536, 5, 458764, 65536, 5, 458765, 65536, 5, 458766, 65536, 5)
+layer_0/tile_data = PackedInt32Array(0, 65536, 4, 1, 131072, 4, 2, 131072, 4, 3, 65536, 4, 4, 131072, 4, 5, 65536, 4, 6, 131072, 4, 7, 65536, 4, 9, 65536, 4, 12, 65536, 4, 11, 131072, 4, 10, 131072, 4, 8, 131072, 4, 393216, 131072, 6, 393217, 131072, 6, 393218, 131072, 6, 393219, 131072, 6, 393220, 131072, 6, 393221, 131072, 6, 393222, 131072, 6, 393223, 131072, 6, 393224, 131072, 6, 393225, 131072, 6, 393226, 131072, 6, 393227, 131072, 6, 393228, 131072, 6, 327680, 0, 5, 327681, 0, 5, 327682, 0, 5, 327683, 0, 5, 327684, 0, 5, 327685, 0, 5, 327686, 0, 5, 327687, 0, 5, 327688, 0, 5, 327689, 0, 5, 327690, 0, 5, 327691, 0, 5, 327692, 0, 5, 327693, 0, 5)
 
 [node name="BoardTileMap" type="TileMap" parent="."]
-position = Vector2(762, 375)
+position = Vector2(0, 4.16666)
 tile_set = SubResource("TileSet_h3ri3")
 format = 2
 layer_1/name = ""

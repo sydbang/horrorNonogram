@@ -1,6 +1,7 @@
 extends Node2D
 
 var CaseSize = 34
+var boardScale = 0.8
 
 var boardTileMap : TileMap
 var labelRows: Control
@@ -45,10 +46,10 @@ func generate_board():
 
 	
 func setBoardPosition():
-	var rect = boardTileMap.get_used_rect()
+	var rect = boardTileMap.get_used_rect() 
 	var position = boardTileMap.position
-	var center = get_viewport().get_visible_rect().size / 2
-	var endpoint = Vector2(rect.end)
+	var center = get_viewport().get_visible_rect().size * boardScale / 2
+	var endpoint = Vector2(rect.end) * boardScale
 	position = center - ((endpoint / 2) * (CaseSize))
 	boardTileMap.position = position 
 	
@@ -126,8 +127,8 @@ func getColData():
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed:
-		var bp = $BoardTileMap.global_position
-		var mP = get_global_mouse_position() - bp
+		var bp = $BoardTileMap.global_position * boardScale 
+		var mP = get_global_mouse_position() * boardScale- bp
 		var tile_x = int(mP.x / CaseSize)
 		var tile_y = int(mP.y / CaseSize)
 		var tile = Vector2(tile_x, tile_y)
@@ -135,9 +136,12 @@ func _input(event):
 			print(tile)
 			var currentCellValue = boardTileMap.get_cell_source_id(0, tile)
 			var newCellValue = 0
-			if currentCellValue == 0:
-				newCellValue = 1
-				boardTileMap.set_cell(0, tile, 1, Vector2i(0, 0), 0)
+			if event.button_index == MOUSE_BUTTON_LEFT:
+				if currentCellValue == 0:
+					newCellValue = 1
+					boardTileMap.set_cell(0, tile, 1, Vector2i(0, 0), 0)
+				else:
+					newCellValue = 0
+					boardTileMap.set_cell(0, tile, 0, Vector2i(0, 0), 0)	
 			else:
-				newCellValue = 0
-				boardTileMap.set_cell(0, tile, 0, Vector2i(0, 0), 0)	
+				boardTileMap.set_cell(0, tile, 2, Vector2i(0, 0), 0)

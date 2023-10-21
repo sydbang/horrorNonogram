@@ -11,16 +11,16 @@ var boardSize : Vector2 = Vector2(10, 10)
 var HValues: Array = []
 var VValues: Array = []
 var map: Array = [
-	[0, 0, 1, 1, 0, 0, 1, 1, 0, 1],
-	[0, 1, 1, 1, 0, 1, 1, 1, 0, 0],
-	[1, 0, 1, 0, 1, 0, 1, 1, 0, 1],
-	[0, 0, 1, 1, 0, 0, 1, 1, 1, 0],
-	[1, 0, 0, 1, 1, 0, 1, 0, 0, 1],
-	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 0, 1, 1, 0, 0, 1, 1, 0, 1],
-	[0, 1, 1, 0, 0, 0, 1, 0, 0, 0],
-	[1, 0, 0, 1, 1, 0, 1, 1, 1, 1],
-	[0, 0, 1, 1, 0, 0, 1, 1, 0, 0]
+	[0, 0, 0, 0, 0, 0, 1, 1, 0, 0],
+	[0, 0, 0, 0, 0, 0, 1, 1, 1, 1],
+	[0, 0, 0, 0, 1, 1, 1, 1, 0, 0],
+	[0, 0, 0, 1, 1, 1, 1, 1, 0, 0],
+	[0, 0, 1, 1, 1, 1, 1, 1, 0, 0],
+	[0, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+	[1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+	[1, 1, 1, 0, 1, 1, 1, 0, 0, 0],
+	[1, 1, 0, 0, 1, 0, 1, 0, 0, 0],
+	[0, 0, 0, 0, 1, 1, 1, 1, 0, 0],
 ]
 	
 func _ready():
@@ -42,7 +42,7 @@ func generate_board():
 	
 	printRowData()
 	printColData()
-	centerBoard()
+
 	
 func setBoardPosition():
 	var rect = boardTileMap.get_used_rect()
@@ -51,26 +51,6 @@ func setBoardPosition():
 	var endpoint = Vector2(rect.end)
 	position = center - ((endpoint / 2) * (CaseSize))
 	boardTileMap.position = position 
-	
-func centerBoard():
-	var hSize = 0
-	var vSize = 0
-	var rect = boardTileMap.get_used_rect().size 
-
-	for child in $LabelRows.get_children():
-		var childRectSize = child.size
-		if childRectSize.x > hSize:
-			hSize = childRectSize.x
-			
-	hSize = (hSize * 2) + (rect.x * 2 * CaseSize)
-	print(hSize)
-	for child in $LabelCols.get_children():
-		var childRectSize = child.size
-		if childRectSize.y > vSize:
-			vSize = childRectSize.y
-
-	vSize = (vSize * 2) + (rect.y * 2 * CaseSize)
-	print(vSize)
 	
 func printRowData():
 	for y in range(int(boardSize.y)):
@@ -143,3 +123,21 @@ func getColData():
 			#print("x: ", x, " = ", chain)
 			chain = 0
 	#print("Vvalues, ", VValues)
+
+func _input(event):
+	if event is InputEventMouseButton and event.pressed:
+		var bp = $BoardTileMap.global_position
+		var mP = get_global_mouse_position() - bp
+		var tile_x = int(mP.x / CaseSize)
+		var tile_y = int(mP.y / CaseSize)
+		var tile = Vector2(tile_x, tile_y)
+		if boardTileMap.get_used_rect().has_point(tile):
+			print(tile)
+			var currentCellValue = boardTileMap.get_cell_source_id(0, tile)
+			var newCellValue = 0
+			if currentCellValue == 0:
+				newCellValue = 1
+				boardTileMap.set_cell(0, tile, 1, Vector2i(0, 0), 0)
+			else:
+				newCellValue = 0
+				boardTileMap.set_cell(0, tile, 0, Vector2i(0, 0), 0)	

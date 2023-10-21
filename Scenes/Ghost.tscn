@@ -1,0 +1,68 @@
+[gd_scene load_steps=9 format=3 uid="uid://bhi7peh17ha0q"]
+
+[ext_resource type="Texture2D" uid="uid://bunecqqu61wl7" path="res://Res/Sprites/Ghost/Ghost.png" id="1_vuka4"]
+[ext_resource type="Texture2D" uid="uid://pwkrahjtps2i" path="res://Res/Sprites/Ghost/Ghost 2.png" id="2_5htwr"]
+[ext_resource type="Texture2D" uid="uid://bmouxh06oj4j0" path="res://Res/Sprites/Ghost/Ghost 3.png" id="3_wlaay"]
+[ext_resource type="Texture2D" uid="uid://claynyj3ni1s" path="res://Res/Sprites/Ghost/Ghost 4.png" id="4_hhemi"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7gwfc"]
+radius = 98.0
+height = 312.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rx0me"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_vuka4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_5htwr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_wlaay")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_hhemi")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_oe3ok"]
+resource_name = "default"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yfnp1"]
+_data = {
+"default": SubResource("Animation_oe3ok")
+}
+
+[node name="Ghost" type="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_7gwfc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(22, -1)
+scale = Vector2(17.875, 19.125)
+sprite_frames = SubResource("SpriteFrames_rx0me")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "default"
+libraries = {
+"": SubResource("AnimationLibrary_yfnp1")
+}

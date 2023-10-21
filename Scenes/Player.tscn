@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bt7vil2htq6lc"]
+[gd_scene load_steps=11 format=3 uid="uid://bt7vil2htq6lc"]
 
 [ext_resource type="Script" path="res://Scenes/Player.gd" id="1_a2mlx"]
 [ext_resource type="Texture2D" uid="uid://bhsowr6xicxbe" path="res://Res/Sprites/Player/Player.png" id="1_gwnil"]
@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://wt6kxoun5ykc" path="res://Res/Sprites/Player/Player 4.png" id="4_6htgs"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gwqiv"]
-radius = 34.0
-height = 84.0
+radius = 58.0
+height = 176.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gvq3f"]
 animations = [{
@@ -30,11 +30,41 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_7xgav"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="Animation_83pur"]
 resource_name = "default"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mwr7b"]
 _data = {
+"RESET": SubResource("Animation_7xgav"),
 "default": SubResource("Animation_83pur")
 }
 
@@ -45,12 +75,12 @@ script = ExtResource("1_a2mlx")
 shape = SubResource("CapsuleShape2D_gwqiv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(6, -6.5)
-scale = Vector2(6.20833, 5.20833)
+position = Vector2(8, -14)
+scale = Vector2(11.9167, 12.5833)
 sprite_frames = SubResource("SpriteFrames_gvq3f")
-frame_progress = 0.635297
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "default"
 libraries = {
 "": SubResource("AnimationLibrary_mwr7b")
 }

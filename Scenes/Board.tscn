@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cedsbmo3056mg"]
+[gd_scene load_steps=17 format=3 uid="uid://cedsbmo3056mg"]
 
 [ext_resource type="Script" path="res://Scripts/Boards.gd" id="1_223rf"]
 [ext_resource type="Texture2D" uid="uid://4md2ma5hxd04" path="res://Res/Sprites/Case.png" id="2_ecu3t"]
@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://cukeatqx6qgw0" path="res://Res/Sprites/Case_filled.png" id="3_0mecy"]
 [ext_resource type="Texture2D" uid="uid://drw527soskfvk" path="res://Res/Sprites/Case_crossed.png" id="5_8pgl0"]
 [ext_resource type="Texture2D" uid="uid://dclxfmqnmjeek" path="res://Res/Sprites/selection.png" id="6_4xbim"]
+[ext_resource type="PackedScene" uid="uid://bt7vil2htq6lc" path="res://Scenes/Player.tscn" id="7_y86ii"]
+[ext_resource type="PackedScene" uid="uid://bhi7peh17ha0q" path="res://Scenes/Ghost.tscn" id="8_30r6v"]
+[ext_resource type="FontFile" uid="uid://dwusstyl4cqnn" path="res://Res/Fonts/Early GameBoy.ttf" id="9_5tg68"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_at4wv"]
 texture = ExtResource("2_w7s5j")
@@ -104,17 +107,18 @@ sources/2 = SubResource("TileSetAtlasSource_iiujj")
 sources/3 = SubResource("TileSetAtlasSource_bg0rs")
 
 [node name="Board" type="Node2D"]
-scale = Vector2(1.2, 1.2)
 script = ExtResource("1_223rf")
 
 [node name="BackgroundTileMap" type="TileMap" parent="."]
+scale = Vector2(0.921074, 0.994218)
 tile_set = SubResource("TileSet_j547w")
 cell_quadrant_size = 128
 format = 2
-layer_0/tile_data = PackedInt32Array(0, 65536, 4, 1, 131072, 4, 2, 131072, 4, 3, 65536, 4, 4, 131072, 4, 5, 65536, 4, 6, 131072, 4, 7, 65536, 4, 9, 65536, 4, 12, 65536, 4, 11, 131072, 4, 10, 131072, 4, 8, 131072, 4, 393216, 131072, 6, 393217, 131072, 6, 393218, 131072, 6, 393219, 131072, 6, 393220, 131072, 6, 393221, 131072, 6, 393222, 131072, 6, 393223, 131072, 6, 393224, 131072, 6, 393225, 131072, 6, 393226, 131072, 6, 393227, 131072, 6, 393228, 131072, 6, 327680, 0, 5, 327681, 0, 5, 327682, 0, 5, 327683, 0, 5, 327684, 0, 5, 327685, 0, 5, 327686, 0, 5, 327687, 0, 5, 327688, 0, 5, 327689, 0, 5, 327690, 0, 5, 327691, 0, 5, 327692, 0, 5, 327693, 0, 5)
+layer_0/tile_data = PackedInt32Array(0, 65536, 4, 1, 131072, 4, 2, 131072, 4, 3, 65536, 4, 4, 131072, 4, 5, 65536, 4, 6, 131072, 4, 7, 65536, 4, 9, 65536, 4, 12, 65536, 4, 11, 131072, 4, 10, 131072, 4, 8, 131072, 4, 458764, 393216, 0, 458763, 393216, 0, 458762, 393216, 0, 458761, 393216, 0, 458760, 393216, 0, 458759, 393216, 0, 458758, 393216, 0, 458757, 393216, 0, 458756, 393216, 0, 458755, 393216, 0, 458754, 393216, 0, 458753, 393216, 0, 458752, 393216, 0, 13, 131072, 4, 14, 65536, 4, 15, 131072, 4, 16, 131072, 4, 524288, 393216, 0, 524289, 393216, 0, 524290, 393216, 0, 524291, 393216, 0, 524292, 393216, 0, 524293, 393216, 0, 524294, 393216, 0, 524295, 393216, 0, 524296, 393216, 0, 524297, 393216, 0, 524298, 393216, 0, 524299, 393216, 0, 524300, 393216, 0, 524301, 393216, 0, 524302, 393216, 0, 524303, 393216, 0, 524304, 393216, 0, 458768, 393216, 0, 458767, 393216, 0, 458766, 393216, 0, 458765, 393216, 0)
 
 [node name="BoardTileMap" type="TileMap" parent="."]
 position = Vector2(0, 4.16666)
+scale = Vector2(1.2, 1.2)
 tile_set = SubResource("TileSet_h3ri3")
 format = 2
 layer_1/name = ""
@@ -159,3 +163,42 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 0, 0, 1)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Player" parent="Control" instance=ExtResource("7_y86ii")]
+position = Vector2(1806, 949)
+
+[node name="Control2" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Ghost" parent="Control2" instance=ExtResource("8_30r6v")]
+position = Vector2(183, 895)
+
+[node name="BackButton" type="Button" parent="."]
+offset_left = 24.0
+offset_top = 111.0
+offset_right = 140.0
+offset_bottom = 166.0
+theme_override_fonts/font = ExtResource("9_5tg68")
+theme_override_font_sizes/font_size = 20
+text = "Back"
+
+[node name="ResetButton" type="Button" parent="."]
+offset_left = 1768.0
+offset_top = 116.0
+offset_right = 1884.0
+offset_bottom = 171.0
+theme_override_fonts/font = ExtResource("9_5tg68")
+theme_override_font_sizes/font_size = 20
+text = "Reset"
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="ResetButton" to="." method="_on_reset_button_pressed"]

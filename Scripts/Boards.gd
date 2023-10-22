@@ -1,7 +1,7 @@
 extends Node2D
 
-var CaseSize = 34
-var boardScale = 0.8
+var CaseSize = 34 * 1.2
+var boardScale = 1.0
 
 var boardTileMap : TileMap
 var labelRows: Control
@@ -43,6 +43,9 @@ func generate_board():
 	
 	printRowData()
 	printColData()
+	for x in range(int(boardSize.x)):
+		for y in range(int(boardSize.y)):
+			boardTileMap.set_cell(1, Vector2i(x, y), 0, Vector2i(0, 0), 0)
 
 	
 func setBoardPosition():
@@ -82,7 +85,7 @@ func printColData():
 		lRectPosition.x = (x - 1) * CaseSize
 		l.position = lRectPosition
 		labelCols.add_child(l)
-	labelCols.position.x = boardTileMap.position.x
+	labelCols.position.x = boardTileMap.position.x + 10
 	labelCols.position.y = boardTileMap.position.y - 40
 
 	
@@ -134,14 +137,24 @@ func _input(event):
 		var tile = Vector2(tile_x, tile_y)
 		if boardTileMap.get_used_rect().has_point(tile):
 			print(tile)
-			var currentCellValue = boardTileMap.get_cell_source_id(0, tile)
+			var currentCellValue = boardTileMap.get_cell_source_id(1, tile)
 			var newCellValue = 0
 			if event.button_index == MOUSE_BUTTON_LEFT:
 				if currentCellValue == 0:
 					newCellValue = 1
-					boardTileMap.set_cell(0, tile, 1, Vector2i(0, 0), 0)
+					boardTileMap.set_cell(1, tile, 1, Vector2i(0, 0), 0)
 				else:
 					newCellValue = 0
-					boardTileMap.set_cell(0, tile, 0, Vector2i(0, 0), 0)	
+					boardTileMap.set_cell(1, tile, 0, Vector2i(0, 0), 0)	
 			else:
-				boardTileMap.set_cell(0, tile, 2, Vector2i(0, 0), 0)
+				boardTileMap.set_cell(1, tile, 2, Vector2i(0, 0), 0)
+
+
+func _on_back_button_pressed():
+	get_tree().change_scene_to_file("res://Scenes/World.tscn")
+
+
+func _on_reset_button_pressed():
+	for x in range(int(boardSize.x)):
+		for y in range(int(boardSize.y)):
+			boardTileMap.set_cell(1, Vector2i(x, y), 0, Vector2i(0, 0), 0)

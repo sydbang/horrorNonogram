@@ -8,21 +8,10 @@ var labelRows: Control
 var labelCols: Control
 var labelInstance: PackedScene = load("res://Scenes/LineLabel.tscn")
 
-var boardSize : Vector2 = Vector2(10, 10)
+var boardSize : Vector2 = Level.boardSize
 var HValues: Array = []
 var VValues: Array = []
-var map: Array = [
-	[0, 0, 0, 0, 0, 0, 1, 1, 0, 0],
-	[0, 0, 0, 0, 0, 0, 1, 1, 1, 1],
-	[0, 0, 0, 0, 1, 1, 1, 1, 0, 0],
-	[0, 0, 0, 1, 1, 1, 1, 1, 0, 0],
-	[0, 0, 1, 1, 1, 1, 1, 1, 0, 0],
-	[0, 1, 1, 1, 1, 1, 1, 1, 0, 0],
-	[1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
-	[1, 1, 1, 0, 1, 1, 1, 0, 0, 0],
-	[1, 1, 0, 0, 1, 0, 1, 0, 0, 0],
-	[0, 0, 0, 0, 1, 1, 1, 1, 0, 0],
-]
+var map: Array = Level.map
 	
 func _ready():
 	boardTileMap = $BoardTileMap

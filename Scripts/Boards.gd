@@ -21,6 +21,7 @@ func _ready():
 	
 
 func generate_board():
+	#create a layer of answer tile map
 	for x in range(int(boardSize.x)):
 		for y in range(int(boardSize.y)):
 			boardTileMap.set_cell(0, Vector2i(x, y), map[y][x], Vector2i(0, 0), 0)
@@ -32,10 +33,26 @@ func generate_board():
 	
 	printRowData()
 	printColData()
+	
+	#create a layer of blank tile map
 	for x in range(int(boardSize.x)):
 		for y in range(int(boardSize.y)):
 			boardTileMap.set_cell(1, Vector2i(x, y), 0, Vector2i(0, 0), 0)
+	
+	
 
+func _process(delta):
+	var bp = $BoardTileMap.global_position * boardScale 
+	var mP = get_global_mouse_position() * boardScale- bp
+	var tile_x = int(mP.x / CaseSize)
+	var tile_y = int(mP.y / CaseSize)
+	var tile = Vector2(tile_x, tile_y)
+	if boardTileMap.get_used_rect().has_point(tile):
+		for x in boardSize.x:
+			for y in boardSize.y:
+				boardTileMap.erase_cell(2,Vector2(x,y))
+		boardTileMap.set_cell(2, tile, 3,Vector2i(0,0), 0)
+	
 	
 func setBoardPosition():
 	var rect = boardTileMap.get_used_rect() 
@@ -126,6 +143,7 @@ func _input(event):
 		var tile = Vector2(tile_x, tile_y)
 		if boardTileMap.get_used_rect().has_point(tile):
 			print(tile)
+			
 			var currentCellValue = boardTileMap.get_cell_source_id(1, tile)
 			var newCellValue = 0
 			if event.button_index == MOUSE_BUTTON_LEFT:

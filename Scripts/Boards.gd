@@ -177,7 +177,7 @@ func jumpScare():
 
 func _on_back_button_pressed():
 	get_tree().change_scene_to_file("res://Scenes/World.tscn")
-
+	
 
 func _on_reset_button_pressed():
 	for x in range(int(boardSize.x)):

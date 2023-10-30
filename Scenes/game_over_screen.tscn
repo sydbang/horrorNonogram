@@ -1,0 +1,117 @@
+[gd_scene load_steps=6 format=3 uid="uid://btj5cr2b6v6bu"]
+
+[ext_resource type="Script" path="res://GameOverScreen.gd" id="1_4l6n3"]
+[ext_resource type="FontFile" uid="uid://dwusstyl4cqnn" path="res://Res/Fonts/Early GameBoy.ttf" id="2_21hrf"]
+[ext_resource type="Texture2D" uid="uid://bu0tv6suj1uxa" path="res://Res/TileMap/Game_Tile.png" id="3_i6tgh"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m1evq"]
+texture = ExtResource("3_i6tgh")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+7:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+4:6/0 = 0
+5:6/0 = 0
+6:6/0 = 0
+7:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+4:7/0 = 0
+5:7/0 = 0
+6:7/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_gclmr"]
+tile_size = Vector2i(128, 128)
+sources/0 = SubResource("TileSetAtlasSource_m1evq")
+
+[node name="GameOverScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4l6n3")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1934.0
+offset_bottom = 1094.0
+color = Color(0.0392157, 0.0392157, 0.0392157, 1)
+
+[node name="GameOver" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 314.0
+offset_right = 1660.0
+offset_bottom = 517.0
+theme_override_fonts/font = ExtResource("2_21hrf")
+theme_override_font_sizes/font_size = 160
+text = "Game Over"
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_gclmr")
+cell_quadrant_size = 128
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 65536, 4, 14, 65536, 4, 13, 65536, 4, 12, 131072, 4, 11, 65536, 4, 10, 131072, 4, 4, 131072, 4, 7, 131072, 4, 6, 131072, 4, 2, 65536, 4, 3, 65536, 4, 9, 65536, 4, 8, 65536, 4, 1, 131072, 4, 5, 131072, 4)
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 653.0
+offset_top = 627.0
+offset_right = 1273.0
+offset_bottom = 800.0
+theme_override_fonts/font = ExtResource("2_21hrf")
+theme_override_font_sizes/font_size = 60
+text = "Try Again?"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

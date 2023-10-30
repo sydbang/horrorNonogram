@@ -3,10 +3,15 @@ extends Node2D
 var CaseSize = 34 * 1.2
 var boardScale = 1.0
 
+var timer = 0.0
+
 var boardTileMap : TileMap
 var labelRows: Control
 var labelCols: Control
 var labelInstance: PackedScene = load("res://Scenes/LineLabel.tscn")
+@onready var jump_scare_image = $jumpScareImage
+
+var imageTexture = [load("res://Res/images/puppy.jpeg")]
 
 var boardSize : Vector2 = Level.boardSize
 var HValues: Array = []
@@ -18,7 +23,6 @@ func _ready():
 	labelCols = $LabelCols
 	labelRows = $LabelRows
 	generate_board()
-	
 
 func generate_board():
 	#create a layer of answer tile map
@@ -38,10 +42,14 @@ func generate_board():
 	for x in range(int(boardSize.x)):
 		for y in range(int(boardSize.y)):
 			boardTileMap.set_cell(1, Vector2i(x, y), 0, Vector2i(0, 0), 0)
+			
 	
-	
-
 func _process(delta):
+	if timer > 0:
+		timer -= delta
+	if timer <= 0:
+		jump_scare_image.visible = false
+		
 	var bp = $BoardTileMap.global_position * boardScale 
 	var mP = get_global_mouse_position() * boardScale- bp
 	var tile_x = int(mP.x / CaseSize)
@@ -148,14 +156,24 @@ func _input(event):
 			var newCellValue = 0
 			if event.button_index == MOUSE_BUTTON_LEFT:
 				if currentCellValue == 0:
-					newCellValue = 1
-					boardTileMap.set_cell(1, tile, 1, Vector2i(0, 0), 0)
+					if boardTileMap.get_cell_source_id(0, tile) == 0:
+						jumpScare()
+					else:
+						newCellValue = 1
+						boardTileMap.set_cell(1, tile, 1, Vector2i(0, 0), 0)
 				else:
 					newCellValue = 0
 					boardTileMap.set_cell(1, tile, 0, Vector2i(0, 0), 0)	
 			else:
 				boardTileMap.set_cell(1, tile, 2, Vector2i(0, 0), 0)
 
+
+func jumpScare():
+	var rng = RandomNumberGenerator.new()
+	timer = 1.0
+	jump_scare_image.texture = imageTexture[rng.randi_range(0, imageTexture.size()-1)]
+	jump_scare_image.visible = true
+	
 
 func _on_back_button_pressed():
 	get_tree().change_scene_to_file("res://Scenes/World.tscn")

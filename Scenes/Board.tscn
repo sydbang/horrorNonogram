@@ -179,7 +179,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Player" parent="Control" instance=ExtResource("7_y86ii")]
-position = Vector2(1806, 949)
+position = Vector2(1782, 950)
 
 [node name="Control2" type="Control" parent="."]
 layout_mode = 3
@@ -188,7 +188,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Ghost" parent="Control2" instance=ExtResource("8_30r6v")]
-position = Vector2(183, 895)
+position = Vector2(159, 878)
 
 [node name="BackButton" type="Button" parent="."]
 offset_left = 24.0
@@ -213,6 +213,38 @@ visible = false
 position = Vector2(981, 554.5)
 scale = Vector2(0.903604, 0.804466)
 texture = ExtResource("10_iwtd0")
+
+[node name="HowTo" type="Label" parent="."]
+offset_left = 41.0
+offset_top = 186.0
+offset_right = 160.0
+offset_bottom = 341.0
+theme_override_fonts/font = ExtResource("9_5tg68")
+text = "left click = colour the box
+right click = X the box
+
+Be aware of jump scares"
+
+[node name="Answer" type="Label" parent="."]
+visible = false
+offset_left = 327.0
+offset_top = 974.0
+offset_right = 1600.0
+offset_bottom = 1116.0
+theme_override_fonts/font = ExtResource("9_5tg68")
+theme_override_font_sizes/font_size = 70
+text = "Answer Here"
+horizontal_alignment = 1
+
+[node name="Victory" type="Label" parent="Answer"]
+layout_mode = 0
+offset_left = 1211.0
+offset_top = -206.0
+offset_right = 1589.0
+offset_bottom = -156.0
+theme_override_fonts/font = ExtResource("9_5tg68")
+theme_override_font_sizes/font_size = 29
+text = "You Escaped!! "
 
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="ResetButton" to="." method="_on_reset_button_pressed"]

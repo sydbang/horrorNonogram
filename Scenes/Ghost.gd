@@ -1,7 +1,8 @@
 extends CharacterBody2D
 
-var countDown = 2
+var countDown = 100
 var player
+var can_move = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,12 +15,14 @@ func _process(delta):
 		return
 	if countDown < 0:
 		return
-	countDown -= delta
-	
-	position.x = lerp(0.0, player.position.x, 1 - countDown/2)
-	position.x = clamp(position.x, 0.0, player.position.x)
+		
+	if can_move: 
+		countDown -= delta
+		
+		position.x = lerp(0.0, player.position.x, 1 - countDown/100)
+		position.x = clamp(position.x, 0.0, player.position.x)
 
-	move_and_slide()
+		move_and_slide()
 
 
 func _on_area_2d_body_entered(body):

@@ -1,7 +1,9 @@
 extends CharacterBody2D
 
-const SPEED = 300.0
+const SPEED = 100.0
+const JUMP_VELOCITY = -400.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var victory_free = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -10,6 +12,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	velocity.y += gravity * delta
-	velocity.x = SPEED 
-	#move_and_slide()
+	if victory_free:
+		velocity.x = SPEED
+		move_and_slide()
+
+

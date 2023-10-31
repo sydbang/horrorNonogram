@@ -12,6 +12,7 @@ var labelInstance: PackedScene = load("res://Scenes/LineLabel.tscn")
 @onready var jump_scare_image = $jumpScareImage
 @onready var ghost = $Control2/Ghost
 @onready var player = $Control/Player
+@onready var answer = $Answer
 
 var imageTexture = [load("res://Res/images/puppy.jpeg")]
 
@@ -19,13 +20,22 @@ var boardSize : Vector2 = Level.boardSize
 var HValues: Array = []
 var VValues: Array = []
 var map: Array = Level.map
+var userMap: Array = []
 	
 func _ready():
 	boardTileMap = $BoardTileMap
 	labelCols = $LabelCols
 	labelRows = $LabelRows
 	ghost.player = player
+	answer.text = Level.picName
 	generate_board()
+	generate_userMap()
+
+func generate_userMap():
+	for x in range(int(boardSize.x)):
+		userMap.append([])
+		for y in range(int(boardSize.y)):
+			userMap[x].append(0)
 
 func generate_board():
 	#create a layer of answer tile map
@@ -115,17 +125,13 @@ func getRowData():
 			if boardTileMap.get_cell_source_id(0, Vector2i(x,y)) == 0:
 				if chain > 0:
 					HValues[y].append(chain)
-						
-					#print("y: ", y, " = ", chain)
 					chain = 0
 			else :
 				chain += 1
 		if chain > 0:
 			HValues[y].append(chain)
-			#print("y: ", y, " = ", chain)
 			chain = 0
 		
-	#print("Hvalues, ", HValues)
 	
 func getColData():
 	var chain = 0
@@ -135,15 +141,12 @@ func getColData():
 			if boardTileMap.get_cell_source_id(0, Vector2i(x,y)) == 0:
 				if chain > 0:
 					VValues[x].append(chain)
-					#print("x: ", x, " = ", chain)
 					chain = 0
 			else :
 				chain += 1
 		if chain > 0:
 			VValues[x].append(chain)
-			#print("x: ", x, " = ", chain)
 			chain = 0
-	#print("Vvalues, ", VValues)
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed:
@@ -153,7 +156,6 @@ func _input(event):
 		var tile_y = int(mP.y / CaseSize)
 		var tile = Vector2(tile_x, tile_y)
 		if boardTileMap.get_used_rect().has_point(tile):
-			print(tile)
 			
 			var currentCellValue = boardTileMap.get_cell_source_id(1, tile)
 			var newCellValue = 0
@@ -164,19 +166,25 @@ func _input(event):
 					else:
 						newCellValue = 1
 						boardTileMap.set_cell(1, tile, 1, Vector2i(0, 0), 0)
+						userMap[tile_y][tile_x] = 1
+						if userMap == map:
+							victory()
 				else:
 					newCellValue = 0
 					boardTileMap.set_cell(1, tile, 0, Vector2i(0, 0), 0)	
 			else:
 				boardTileMap.set_cell(1, tile, 2, Vector2i(0, 0), 0)
 
+func victory():
+	answer.visible = true
+	ghost.can_move = false
+	player.victory_free = true
 
 func jumpScare():
 	var rng = RandomNumberGenerator.new()
 	timer = 1.0
 	jump_scare_image.texture = imageTexture[rng.randi_range(0, imageTexture.size()-1)]
 	jump_scare_image.visible = true
-	
 
 func _on_back_button_pressed():
 	get_tree().change_scene_to_file("res://Scenes/World.tscn")

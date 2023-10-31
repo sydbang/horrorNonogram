@@ -13,8 +13,9 @@ var labelInstance: PackedScene = load("res://Scenes/LineLabel.tscn")
 @onready var ghost = $Control2/Ghost
 @onready var player = $Control/Player
 @onready var answer = $Answer
+@onready var scream_sound = $ScreamSound
 
-var imageTexture = [load("res://Res/images/puppy.jpeg")]
+var imageTexture = [load("res://Res/images/jumpscare1.jpeg"), load("res://Res/images/jumpscare2.jpeg"), load("res://Res/images/jumpscare3.jpeg"), load("res://Res/images/jumpscare4.jpeg")]
 
 var boardSize : Vector2 = Level.boardSize
 var HValues: Array = []
@@ -185,6 +186,7 @@ func jumpScare():
 	timer = 1.0
 	jump_scare_image.texture = imageTexture[rng.randi_range(0, imageTexture.size()-1)]
 	jump_scare_image.visible = true
+	scream_sound.play()
 
 func _on_back_button_pressed():
 	get_tree().change_scene_to_file("res://Scenes/World.tscn")

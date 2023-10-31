@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cedsbmo3056mg"]
+[gd_scene load_steps=19 format=3 uid="uid://cedsbmo3056mg"]
 
 [ext_resource type="Script" path="res://Scripts/Boards.gd" id="1_223rf"]
 [ext_resource type="Texture2D" uid="uid://4md2ma5hxd04" path="res://Res/Sprites/Case.png" id="2_ecu3t"]
@@ -9,7 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://bt7vil2htq6lc" path="res://Scenes/Player.tscn" id="7_y86ii"]
 [ext_resource type="PackedScene" uid="uid://bhi7peh17ha0q" path="res://Scenes/Ghost.tscn" id="8_30r6v"]
 [ext_resource type="FontFile" uid="uid://dwusstyl4cqnn" path="res://Res/Fonts/Early GameBoy.ttf" id="9_5tg68"]
-[ext_resource type="Texture2D" uid="uid://bsyqnwsfya23v" path="res://Res/images/puppy.jpeg" id="10_iwtd0"]
+[ext_resource type="Texture2D" uid="uid://c32c7otryiqkr" path="res://Res/images/jumpscare5.webp" id="10_cd13j"]
+[ext_resource type="AudioStream" uid="uid://5dqk5fr3k7ah" path="res://Music/scream.mp3" id="11_qa3b4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_at4wv"]
 texture = ExtResource("2_w7s5j")
@@ -208,22 +209,21 @@ theme_override_fonts/font = ExtResource("9_5tg68")
 theme_override_font_sizes/font_size = 20
 text = "Reset"
 
-[node name="jumpScareImage" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(981, 554.5)
-scale = Vector2(0.903604, 0.804466)
-texture = ExtResource("10_iwtd0")
-
 [node name="HowTo" type="Label" parent="."]
 offset_left = 41.0
 offset_top = 186.0
-offset_right = 160.0
+offset_right = 427.0
 offset_bottom = 341.0
 theme_override_fonts/font = ExtResource("9_5tg68")
 text = "left click = colour the box
 right click = X the box
 
 Be aware of jump scares"
+
+[node name="jumpScareImage" type="Sprite2D" parent="."]
+position = Vector2(968, 549)
+scale = Vector2(3.05938, 2.83)
+texture = ExtResource("10_cd13j")
 
 [node name="Answer" type="Label" parent="."]
 visible = false
@@ -245,6 +245,9 @@ offset_bottom = -156.0
 theme_override_fonts/font = ExtResource("9_5tg68")
 theme_override_font_sizes/font_size = 29
 text = "You Escaped!! "
+
+[node name="ScreamSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_qa3b4")
 
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="ResetButton" to="." method="_on_reset_button_pressed"]

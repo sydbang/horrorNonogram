@@ -10,6 +10,8 @@ var labelRows: Control
 var labelCols: Control
 var labelInstance: PackedScene = load("res://Scenes/LineLabel.tscn")
 @onready var jump_scare_image = $jumpScareImage
+@onready var ghost = $Control2/Ghost
+@onready var player = $Control/Player
 
 var imageTexture = [load("res://Res/images/puppy.jpeg")]
 
@@ -22,6 +24,7 @@ func _ready():
 	boardTileMap = $BoardTileMap
 	labelCols = $LabelCols
 	labelRows = $LabelRows
+	ghost.player = player
 	generate_board()
 
 func generate_board():

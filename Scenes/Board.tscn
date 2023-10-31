@@ -210,8 +210,8 @@ text = "Reset"
 
 [node name="jumpScareImage" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(966, 537)
-scale = Vector2(3.04687, 2.69)
+position = Vector2(981, 554.5)
+scale = Vector2(0.903604, 0.804466)
 texture = ExtResource("10_iwtd0")
 
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

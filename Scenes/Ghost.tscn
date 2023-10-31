@@ -1,12 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://bhi7peh17ha0q"]
+[gd_scene load_steps=10 format=3 uid="uid://bhi7peh17ha0q"]
 
+[ext_resource type="Script" path="res://Scenes/Ghost.gd" id="1_80gt3"]
 [ext_resource type="Texture2D" uid="uid://bunecqqu61wl7" path="res://Res/Sprites/Ghost/Ghost.png" id="1_vuka4"]
 [ext_resource type="Texture2D" uid="uid://pwkrahjtps2i" path="res://Res/Sprites/Ghost/Ghost 2.png" id="2_5htwr"]
 [ext_resource type="Texture2D" uid="uid://bmouxh06oj4j0" path="res://Res/Sprites/Ghost/Ghost 3.png" id="3_wlaay"]
 [ext_resource type="Texture2D" uid="uid://claynyj3ni1s" path="res://Res/Sprites/Ghost/Ghost 4.png" id="4_hhemi"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7gwfc"]
-radius = 98.0
+radius = 93.0
 height = 312.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_rx0me"]
@@ -52,6 +53,7 @@ _data = {
 }
 
 [node name="Ghost" type="CharacterBody2D"]
+script = ExtResource("1_80gt3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_7gwfc")
@@ -66,3 +68,10 @@ autoplay = "default"
 libraries = {
 "": SubResource("AnimationLibrary_yfnp1")
 }
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_7gwfc")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

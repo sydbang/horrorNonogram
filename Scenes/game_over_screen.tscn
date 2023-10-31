@@ -84,8 +84,8 @@ script = ExtResource("1_4l6n3")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
-offset_right = 1934.0
-offset_bottom = 1094.0
+offset_right = 1926.0
+offset_bottom = 1090.0
 color = Color(0.0392157, 0.0392157, 0.0392157, 1)
 
 [node name="GameOver" type="Label" parent="ColorRect"]

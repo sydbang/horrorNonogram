@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var countDown = 100
+var countDown = 250
 var player
 var can_move = true
 
@@ -19,7 +19,7 @@ func _process(delta):
 	if can_move: 
 		countDown -= delta
 		
-		position.x = lerp(0.0, player.position.x, 1 - countDown/100)
+		position.x = lerp(0.0, player.position.x, 1 - countDown/250)
 		position.x = clamp(position.x, 0.0, player.position.x)
 
 		move_and_slide()

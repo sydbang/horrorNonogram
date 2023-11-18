@@ -114,4 +114,14 @@ theme_override_fonts/font = ExtResource("2_21hrf")
 theme_override_font_sizes/font_size = 60
 text = "Try Again?"
 
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 627.0
+offset_top = 1038.0
+offset_right = 1936.0
+offset_bottom = 1096.0
+theme_override_fonts/font = ExtResource("2_21hrf")
+theme_override_font_sizes/font_size = 20
+text = "Many Thanks To Jan Dohring for making this awesome music for this game"
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

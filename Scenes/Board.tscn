@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bt7vil2htq6lc" path="res://Scenes/Player.tscn" id="7_y86ii"]
 [ext_resource type="PackedScene" uid="uid://bhi7peh17ha0q" path="res://Scenes/Ghost.tscn" id="8_30r6v"]
 [ext_resource type="FontFile" uid="uid://dwusstyl4cqnn" path="res://Res/Fonts/Early GameBoy.ttf" id="9_5tg68"]
-[ext_resource type="Texture2D" uid="uid://c32c7otryiqkr" path="res://Res/images/jumpscare5.webp" id="10_cd13j"]
+[ext_resource type="Texture2D" uid="uid://bylnx825kk4q0" path="res://Res/images/jumpscare4.jpeg" id="10_osjna"]
 [ext_resource type="AudioStream" uid="uid://5dqk5fr3k7ah" path="res://Music/scream.mp3" id="11_qa3b4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_at4wv"]
@@ -223,7 +223,7 @@ Be aware of jump scares"
 [node name="jumpScareImage" type="Sprite2D" parent="."]
 position = Vector2(968, 549)
 scale = Vector2(3.05938, 2.83)
-texture = ExtResource("10_cd13j")
+texture = ExtResource("10_osjna")
 
 [node name="Answer" type="Label" parent="."]
 visible = false

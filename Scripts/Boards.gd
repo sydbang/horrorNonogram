@@ -15,7 +15,7 @@ var labelInstance: PackedScene = load("res://Scenes/LineLabel.tscn")
 @onready var answer = $Answer
 @onready var scream_sound = $ScreamSound
 
-var imageTexture = [load("res://Res/images/jumpscare1.jpeg"), load("res://Res/images/jumpscare2.jpeg"), load("res://Res/images/jumpscare3.jpeg"), load("res://Res/images/jumpscare4.jpeg")]
+var imageTexture = [load("res://Res/images/jumpscare1.jpeg"), load("res://Res/images/jumpscare4.jpeg")]
 
 var boardSize : Vector2 = Level.boardSize
 var HValues: Array = []
